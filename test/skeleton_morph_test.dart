@@ -64,4 +64,39 @@ void main() {
     expect(find.byType(Padding), findsWidgets);
     expect(find.byType(SkeletonText), findsOneWidget);
   });
+
+  testWidgets('PulseEffect repeats while skeleton is mounted', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: SkeletonTheme(
+          config: SkeletonConfig(
+            effect: PulseEffect(minOpacity: 0.2, maxOpacity: 1.0),
+            animationDuration: Duration(milliseconds: 100),
+          ),
+          child: SkeletonBox(width: 20, height: 20),
+        ),
+      ),
+    );
+
+    double opacity() {
+      final transition = tester
+          .widgetList<FadeTransition>(find.byType(FadeTransition))
+          .where((transition) => transition.child is Container)
+          .single;
+      return transition.opacity.value;
+    }
+
+    final initialOpacity = opacity();
+
+    await tester.pump(const Duration(milliseconds: 50));
+    final midOpacity = opacity();
+
+    await tester.pump(const Duration(milliseconds: 25));
+    final laterOpacity = opacity();
+
+    expect(midOpacity, isNot(equals(initialOpacity)));
+    expect(laterOpacity, isNot(equals(midOpacity)));
+
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
 }
