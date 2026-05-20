@@ -46,4 +46,22 @@ void main() {
     expect(find.text('Real content'), findsNothing);
     expect(find.byType(SkeletonBox), findsOneWidget);
   });
+
+  testWidgets('skeletonizes Padding child when enabled', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: SkeletonMorph(
+          enabled: true,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Text('Padded content'),
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Padded content'), findsNothing);
+    expect(find.byType(Padding), findsWidgets);
+    expect(find.byType(SkeletonText), findsOneWidget);
+  });
 }

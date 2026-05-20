@@ -57,9 +57,13 @@ class LayoutSkeletonizer {
     }
 
     if (widget is Padding) {
+      final child = widget.child;
+
       return Padding(
         padding: widget.padding,
-        child: skeletonizer.build(widget.child!, context.nextDepth()),
+        child: child == null
+            ? null
+            : skeletonizer.build(child, context.nextDepth()),
       );
     }
 
