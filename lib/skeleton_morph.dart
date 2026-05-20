@@ -7,7 +7,7 @@
 /// ```dart
 /// import 'package:skeleton_morph/skeleton_morph.dart';
 /// ```
-library skeleton_morph;
+library;
 
 export 'src/annotations/skeleton_hint.dart';
 export 'src/annotations/skeleton_ignore.dart';
