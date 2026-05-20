@@ -8,3 +8,4 @@ Initial development release.
 - Added configurable effects: shimmer, pulse, and static.
 - Added `SkeletonTheme` and `SkeletonConfig` for shared styling.
 - Added example app and initial widget tests.
+- Fixed `PulseEffect` so it repeats continuously while mounted and disposes its animation controller correctly.
