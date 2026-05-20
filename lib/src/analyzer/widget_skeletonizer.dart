@@ -7,6 +7,21 @@ import 'package:skeleton_morph/src/analyzer/text_skeletonizer.dart';
 
 /// Central service that transforms widgets into skeleton placeholders.
 ///
+/// This class is the package's internal "router" for skeleton generation. It
+/// receives a real Flutter widget and decides which specialized skeletonizer
+/// should handle it.
+///
+/// The order of checks is intentional:
+/// 1. explicit user intent (`SkeletonIgnore`, `SkeletonReplace`,
+///    `SkeletonHint`);
+/// 2. structural layout widgets (`Row`, `Column`, `Padding`, etc.);
+/// 3. semantic leaf widgets (`Text`, `Image`, boxes);
+/// 4. a conservative fallback box.
+///
+/// That priority matters because hints/replacements must always win over
+/// automatic inference. If users took the time to provide metadata, the package
+/// should trust that metadata first.
+///
 /// Design patterns:
 /// - Facade: exposes one [build] method for the rest of the package.
 /// - Chain of Responsibility: delegates to specialized skeletonizers.
@@ -32,6 +47,11 @@ class WidgetSkeletonizer {
   final ContainerSkeletonizer _containerSkeletonizer;
   final LayoutSkeletonizer _layoutSkeletonizer;
 
+  /// Builds a skeleton equivalent for [widget].
+  ///
+  /// The method does not mutate or mount [widget]. Flutter widgets are immutable
+  /// configuration objects, so the skeletonizer creates a new widget tree that
+  /// approximates the original layout.
   Widget build(Widget widget, SkeletonBuildContext context) {
     if (widget is SkeletonIgnore) {
       return widget.child;
@@ -64,6 +84,12 @@ class WidgetSkeletonizer {
     return _fallback(widget, context);
   }
 
+  /// Converts explicit user metadata into concrete skeleton widgets.
+  ///
+  /// `SkeletonHint` exists because custom widgets hide their internal structure.
+  /// For example, a `ProductImage` widget may visually be an image, but from the
+  /// outside it is just an opaque widget configuration. The hint bridges that
+  /// gap without forcing consumers to duplicate entire loading layouts.
   Widget _fromHint(SkeletonHint hint, SkeletonBuildContext context) {
     switch (hint.kind) {
       case SkeletonHintKind.text:
@@ -88,6 +114,11 @@ class WidgetSkeletonizer {
     }
   }
 
+  /// Last-resort placeholder for widgets the package cannot understand.
+  ///
+  /// The fallback is intentionally simple. A wrong but stable placeholder is
+  /// better than trying to inspect private widget internals and producing
+  /// fragile behavior.
   Widget _fallback(Widget widget, SkeletonBuildContext context) {
     return SkeletonBox(
       height: context.config.textHeight * 2.6,

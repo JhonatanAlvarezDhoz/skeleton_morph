@@ -5,14 +5,25 @@ import '../core/skeleton_effect.dart';
 
 /// Shimmer loading effect used by default.
 ///
+/// `ShimmerEffect` paints a moving gradient over an already-built skeleton
+/// shape. It does not decide layout, size, radius, or spacing. Those concerns
+/// belong to widgets such as `SkeletonBox`, `SkeletonText`, and
+/// `SkeletonImage`.
+///
+/// The effect owns an [AnimationController] internally and repeats it while the
+/// skeleton is mounted. When the skeleton leaves the widget tree, the controller
+/// is disposed.
+///
 /// Design pattern: Strategy.
-/// The placeholder shape is provided by the widgets. This class only adds a
-/// moving gradient on top of that shape.
 class ShimmerEffect extends SkeletonEffect {
   const ShimmerEffect({
     this.direction = Axis.horizontal,
   });
 
+  /// Direction in which the shimmer highlight travels.
+  ///
+  /// Horizontal is the default because most loading placeholders mimic text and
+  /// cards, which are usually scanned left-to-right or right-to-left.
   final Axis direction;
 
   @override
@@ -44,6 +55,10 @@ class _ShimmerEffectView extends StatefulWidget {
 
 class _ShimmerEffectViewState extends State<_ShimmerEffectView>
     with SingleTickerProviderStateMixin {
+  /// Drives the moving gradient.
+  ///
+  /// The controller repeats indefinitely because a skeleton is a loading state,
+  /// not a one-shot transition.
   late final AnimationController _controller;
 
   @override
@@ -58,6 +73,8 @@ class _ShimmerEffectViewState extends State<_ShimmerEffectView>
 
   @override
   void dispose() {
+    // The effect owns the ticker, so it must dispose it to avoid leaks when the
+    // skeleton disappears.
     _controller.dispose();
     super.dispose();
   }
@@ -70,6 +87,9 @@ class _ShimmerEffectViewState extends State<_ShimmerEffectView>
       builder: (context, child) {
         final value = _controller.value;
 
+        // The gradient moves by shifting both its begin and end alignments.
+        // The placeholder shape itself remains untouched; only the shader mask
+        // changes over time.
         final begin = widget.direction == Axis.horizontal
             ? Alignment(-1.0 + value * 2, 0)
             : Alignment(0, -1.0 + value * 2);

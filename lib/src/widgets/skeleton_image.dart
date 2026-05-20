@@ -7,6 +7,9 @@ import 'skeleton_box.dart';
 ///
 /// It supports fixed sizes and aspect ratios, making it useful for thumbnails,
 /// banners, avatars and product images.
+///
+/// This widget is still just a skeleton shape; it does not load, decode, cache,
+/// or inspect real image providers.
 class SkeletonImage extends StatelessWidget {
   const SkeletonImage({
     super.key,
@@ -16,9 +19,16 @@ class SkeletonImage extends StatelessWidget {
     this.borderRadius,
   });
 
+  /// Optional fixed width.
   final double? width;
+
+  /// Optional fixed height.
   final double? height;
+
+  /// Optional aspect ratio for responsive image placeholders.
   final double? aspectRatio;
+
+  /// Optional radius override.
   final BorderRadiusGeometry? borderRadius;
 
   @override
