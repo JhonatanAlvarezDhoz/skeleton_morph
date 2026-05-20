@@ -1,10 +1,6 @@
 name: skeleton_morph
 description: Crea skeletons automáticos desde tu UI real, con hints opcionales para obtener resultados precisos en cards, imágenes, textos y listas.
 version: 0.1.0
-homepage: https://example.com/skeleton_morph
-repository: https://example.com/skeleton_morph
-issue_tracker: https://example.com/skeleton_morph/issues
-
 environment:
   sdk: ">=3.3.0 <4.0.0"
   flutter: ">=3.19.0"
