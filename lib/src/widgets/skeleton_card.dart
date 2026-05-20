@@ -5,6 +5,11 @@ import 'skeleton_box.dart';
 
 /// Generic card-shaped placeholder.
 ///
+/// Use this when a screen has a repeated card layout and a single box is not
+/// expressive enough. If [child] is omitted, the card behaves like a simple
+/// rounded rectangle. If [child] is provided, the card becomes a low-contrast
+/// container for manually composed skeleton content.
+///
 /// Design pattern: Template Method, at widget composition level.
 /// The outer structure is fixed as a card-like placeholder, while the optional
 /// [child] lets consumers customize the inner content.
@@ -19,11 +24,22 @@ class SkeletonCard extends StatelessWidget {
     this.child,
   });
 
+  /// Optional fixed width.
   final double? width;
+
+  /// Optional fixed height.
   final double? height;
+
+  /// Optional radius override.
   final BorderRadiusGeometry? borderRadius;
+
+  /// Inner spacing used when [child] is provided.
   final EdgeInsetsGeometry padding;
+
+  /// External spacing around the card.
   final EdgeInsetsGeometry? margin;
+
+  /// Optional custom skeleton content.
   final Widget? child;
 
   @override

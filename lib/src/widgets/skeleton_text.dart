@@ -5,6 +5,11 @@ import 'skeleton_box.dart';
 
 /// Placeholder that simulates one or more lines of text.
 ///
+/// Text skeletons are built from multiple [SkeletonBox] lines so they inherit
+/// the active global/local effect automatically. When [width] is omitted and
+/// there is more than one line, the last line is shortened to look more like a
+/// natural paragraph.
+///
 /// Design pattern: Composite.
 /// A text skeleton is composed of multiple [SkeletonBox] widgets.
 class SkeletonText extends StatelessWidget {
@@ -17,10 +22,19 @@ class SkeletonText extends StatelessWidget {
     this.lastLineWidthFactor = 0.65,
   }) : assert(lines > 0, 'lines must be greater than zero');
 
+  /// Number of text lines to render.
   final int lines;
+
+  /// Optional fixed width for every line.
   final double? width;
+
+  /// Optional line height. Defaults to [SkeletonConfig.textHeight].
   final double? height;
+
+  /// Optional spacing between lines. Defaults to [SkeletonConfig.spacing].
   final double? spacing;
+
+  /// Width factor used by the last line when [width] is omitted.
   final double lastLineWidthFactor;
 
   @override
