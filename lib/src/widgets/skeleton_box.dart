@@ -22,6 +22,7 @@ class SkeletonBox extends StatelessWidget {
     this.margin,
     this.padding,
     this.alignment,
+    this.child,
   });
 
   /// Optional fixed width for the placeholder.
@@ -42,6 +43,12 @@ class SkeletonBox extends StatelessWidget {
   /// Alignment passed to the underlying container.
   final AlignmentGeometry? alignment;
 
+  /// Optional content rendered inside the skeleton shape.
+  ///
+  /// This is useful for semantic placeholders such as image skeletons that need
+  /// a centered icon while still sharing the same base shape and effect.
+  final Widget? child;
+
   @override
   Widget build(BuildContext context) {
     final config = SkeletonConfig.of(context);
@@ -56,6 +63,7 @@ class SkeletonBox extends StatelessWidget {
         color: config.baseColor,
         borderRadius: borderRadius ?? config.borderRadius,
       ),
+      child: child,
     );
 
     // Effects decorate an already-built shape. This keeps sizing/layout

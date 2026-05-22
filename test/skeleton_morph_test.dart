@@ -99,4 +99,31 @@ void main() {
 
     await tester.pumpWidget(const SizedBox.shrink());
   });
+
+  testWidgets('SkeletonImage shows centered image icon by default',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: SkeletonImage(width: 120, height: 80),
+      ),
+    );
+
+    expect(find.byIcon(Icons.image_outlined), findsOneWidget);
+    expect(find.byType(Stack), findsOneWidget);
+    expect(find.byType(Positioned), findsOneWidget);
+  });
+
+  testWidgets('SkeletonImage preserves explicit dimensions with icon overlay',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Center(
+          child: SkeletonImage(width: 120, height: 80),
+        ),
+      ),
+    );
+
+    expect(tester.getSize(find.byType(SkeletonImage)), const Size(120, 80));
+    expect(find.byIcon(Icons.image_outlined), findsOneWidget);
+  });
 }

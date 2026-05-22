@@ -1,3 +1,9 @@
+## 0.1.1
+
+- Added a centered image icon to `SkeletonImage` by default.
+- Added `showIcon`, `icon`, `iconSize`, and `iconColor` customization options to `SkeletonImage`.
+- Added optional `child` support to `SkeletonBox` for semantic placeholder composition.
+
 ## 0.1.0
 
 Initial development release.

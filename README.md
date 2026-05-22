@@ -127,6 +127,17 @@ SkeletonMorph(
 )
 ```
 
+`SkeletonImage` shows a centered image icon by default. You can customize or hide it when composing manual skeletons:
+
+```dart
+const SkeletonImage(
+  width: 96,
+  height: 96,
+  showIcon: true,
+  icon: Icons.image_outlined,
+)
+```
+
 ## Manual replacement
 
 Use `SkeletonReplace` when automatic inference is not enough.
