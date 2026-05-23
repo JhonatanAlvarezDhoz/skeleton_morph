@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
-
-import '../core/skeleton_transition.dart';
+import 'package:skeleton_morph/src/core/skeleton_transition.dart';
 
 /// Cross-fades between the skeleton tree and the real content tree.
 ///
