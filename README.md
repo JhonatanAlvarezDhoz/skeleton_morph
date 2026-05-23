@@ -16,7 +16,6 @@ Create automatic loading skeletons from your real Flutter UI, with optional hint
 ## Version
 
 Current version: `0.2.0`
-
 ## Platform support
 
 `skeleton_morph` is a pure Flutter widget package and supports all Flutter platforms.
