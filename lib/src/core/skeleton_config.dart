@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../effects/shimmer_effect.dart';
+import '../transitions/fade_skeleton_transition.dart';
 import 'skeleton_effect.dart';
+import 'skeleton_transition.dart';
 
 /// Immutable configuration object for skeleton_morph.
 ///
@@ -12,7 +14,9 @@ import 'skeleton_effect.dart';
 /// This makes the package predictable:
 /// - app-wide styling goes through `SkeletonTheme`;
 /// - one-off styling goes through `SkeletonMorph.config`;
-/// - tests can use `StaticEffect` to avoid animated output.
+/// - tests can use `StaticEffect` to avoid animated output;
+/// - transition behavior is configured separately from skeleton placeholder
+///   effects.
 ///
 /// Design pattern: Value Object.
 /// This class centralizes visual decisions so widgets do not duplicate default
@@ -28,6 +32,8 @@ class SkeletonConfig {
     this.spacing = 8,
     this.effect = const ShimmerEffect(),
     this.animationDuration = const Duration(milliseconds: 1200),
+    this.transition = const FadeSkeletonTransition(),
+    this.transitionDuration = const Duration(milliseconds: 250),
     this.ignorePointersWhenLoading = true,
   });
 
@@ -54,8 +60,22 @@ class SkeletonConfig {
   /// Visual effect applied to every skeleton primitive.
   final SkeletonEffect effect;
 
-  /// Duration used by animated effects.
+  /// Duration used by animated loading effects.
+  ///
+  /// This controls effects such as `ShimmerEffect` and `PulseEffect`; it does
+  /// not control the transition between skeleton and real content.
   final Duration animationDuration;
+
+  /// Transition used when `SkeletonMorph.enabled` switches between loading and
+  /// loaded states.
+  ///
+  /// This is intentionally separate from [effect]. The effect animates the
+  /// placeholder while loading; the transition animates the replacement of the
+  /// skeleton subtree with the real content subtree.
+  final SkeletonTransition transition;
+
+  /// Duration used by [transition].
+  final Duration transitionDuration;
 
   /// Whether skeletonized content should ignore pointer events while loading.
   ///
@@ -73,6 +93,8 @@ class SkeletonConfig {
     double? spacing,
     SkeletonEffect? effect,
     Duration? animationDuration,
+    SkeletonTransition? transition,
+    Duration? transitionDuration,
     bool? ignorePointersWhenLoading,
   }) {
     return SkeletonConfig(
@@ -84,6 +106,8 @@ class SkeletonConfig {
       spacing: spacing ?? this.spacing,
       effect: effect ?? this.effect,
       animationDuration: animationDuration ?? this.animationDuration,
+      transition: transition ?? this.transition,
+      transitionDuration: transitionDuration ?? this.transitionDuration,
       ignorePointersWhenLoading:
           ignorePointersWhenLoading ?? this.ignorePointersWhenLoading,
     );

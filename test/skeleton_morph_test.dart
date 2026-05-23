@@ -126,4 +126,30 @@ void main() {
     expect(tester.getSize(find.byType(SkeletonImage)), const Size(120, 80));
     expect(find.byIcon(Icons.image_outlined), findsOneWidget);
   });
+
+  testWidgets('SkeletonMorph uses configured transition', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: SkeletonMorph(
+          enabled: true,
+          child: Text('Loaded title'),
+        ),
+      ),
+    );
+
+    expect(find.byType(AnimatedSwitcher), findsOneWidget);
+    expect(find.text('Loaded title'), findsNothing);
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: SkeletonMorph(
+          enabled: false,
+          child: Text('Loaded title'),
+        ),
+      ),
+    );
+
+    expect(find.byType(AnimatedSwitcher), findsOneWidget);
+    expect(find.text('Loaded title'), findsOneWidget);
+  });
 }

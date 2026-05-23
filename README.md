@@ -1,10 +1,34 @@
 # skeleton_morph
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/JhonatanAlvarezDhoz/assets/main/branding/banner.png" alt="skeleton_morph banner" width="100%" />
+</p>
+
 Create automatic loading skeletons from your real Flutter UI, with optional hints for precise placeholders in cards, images, text, lists, and custom widgets.
+
+## Effects demo
+
+| <div align="center">Pulse effect</div> | <div align="center">Shimmer effect</div> |
+| :---: | :---: |
+| <div align="center"><img src="https://raw.githubusercontent.com/JhonatanAlvarezDhoz/assets/main/preview/gif/pulseEffect.gif" alt="PulseEffect demo" width="320" /></div> | <div align="center"><img src="https://raw.githubusercontent.com/JhonatanAlvarezDhoz/assets/main/preview/gif/shimmerEffect.gif" alt="ShimmerEffect demo" width="320" /></div> |
+| Use `PulseEffect()` for a soft breathing placeholder animation. | Use `ShimmerEffect()` for a moving highlight placeholder animation. |
 
 ## Version
 
-Current version: `0.1.0`
+Current version: `0.2.0`
+
+## Platform support
+
+`skeleton_morph` is a pure Flutter widget package and supports all Flutter platforms.
+
+<p>
+  <img src="https://img.shields.io/badge/Android-supported-brightgreen?logo=android" alt="Android supported" />
+  <img src="https://img.shields.io/badge/iOS-supported-brightgreen?logo=apple" alt="iOS supported" />
+  <img src="https://img.shields.io/badge/Web-supported-brightgreen?logo=googlechrome" alt="Web supported" />
+  <img src="https://img.shields.io/badge/macOS-supported-brightgreen?logo=apple" alt="macOS supported" />
+  <img src="https://img.shields.io/badge/Windows-supported-brightgreen?logo=windows" alt="Windows supported" />
+  <img src="https://img.shields.io/badge/Linux-supported-brightgreen?logo=linux" alt="Linux supported" />
+</p>
 
 ## Features
 
@@ -14,6 +38,7 @@ Current version: `0.1.0`
 - `SkeletonIgnore` to keep parts of the UI unchanged.
 - Reusable primitives: `SkeletonBox`, `SkeletonText`, `SkeletonImage`, `SkeletonCard`, and `SkeletonList`.
 - Configurable effects: shimmer, pulse, and static.
+- Configurable transitions between skeleton and real content.
 - Shared styling through `SkeletonTheme` and `SkeletonConfig`.
 
 ## Installation
@@ -22,7 +47,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  skeleton_morph: ^0.1.0
+  skeleton_morph: ^0.2.0
 ```
 
 Then import it:
@@ -80,6 +105,65 @@ SkeletonMorph(
     effect: StaticEffect(),
   ),
   child: MyWidget(),
+)
+```
+
+### Transitions
+
+`SkeletonEffect` animates the placeholder while loading. `SkeletonTransition` animates the switch between the skeleton tree and the real content tree.
+
+The default transition is `FadeSkeletonTransition`. You can configure transitions globally:
+
+```dart
+SkeletonTheme(
+  config: const SkeletonConfig(
+    transition: FadeThroughSkeletonTransition(),
+    transitionDuration: Duration(milliseconds: 300),
+  ),
+  child: MyApp(),
+)
+```
+
+To disable transitions globally, set `NoSkeletonTransition` in `SkeletonTheme`:
+
+```dart
+SkeletonTheme(
+  config: const SkeletonConfig(
+    transition: NoSkeletonTransition(),
+  ),
+  child: MyApp(),
+)
+```
+
+Available transitions:
+
+- `FadeSkeletonTransition`: simple cross-fade between skeleton and content.
+- `FadeThroughSkeletonTransition`: fades through the loading state, useful when skeleton and content shapes differ.
+- `ScaleFadeSkeletonTransition`: fades and subtly scales the incoming subtree.
+- `NoSkeletonTransition`: disables skeleton/content transition animations.
+
+For a local transition override:
+
+```dart
+SkeletonMorph(
+  enabled: isLoading,
+  config: const SkeletonConfig(
+    transition: ScaleFadeSkeletonTransition(),
+  ),
+  child: ProductCard(),
+)
+```
+
+To disable the transition only for one `SkeletonMorph`, use
+`NoSkeletonTransition`:
+
+```dart
+SkeletonMorph(
+  enabled: isLoading,
+  config: const SkeletonConfig(
+    transition: NoSkeletonTransition(),
+  ),
+  child: ProductCard(),
 )
 ```
 

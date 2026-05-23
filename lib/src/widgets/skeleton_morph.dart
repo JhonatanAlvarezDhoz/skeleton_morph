@@ -63,11 +63,26 @@ class SkeletonMorph extends StatelessWidget {
           )
         : child;
 
-    if (enabled && effectiveConfig.ignorePointersWhenLoading) {
-      // Loading placeholders should not behave like real controls. Ignoring
-      // pointer events avoids accidental taps on UI that is not ready yet.
-      content = IgnorePointer(child: content);
-    }
+    content = effectiveConfig.transition.build(
+      child: content,
+      loading: enabled,
+      duration: effectiveConfig.transitionDuration,
+    );
+
+    // Keep the root widget stable across loading changes.
+    //
+    // Before this, `IgnorePointer` only existed while loading:
+    // - loading: IgnorePointer -> AnimatedSwitcher
+    // - loaded:  AnimatedSwitcher
+    //
+    // That changed the element tree shape and caused Flutter to dispose the
+    // AnimatedSwitcher exactly when `enabled` changed. If the switcher is
+    // recreated, it cannot keep the outgoing child alive, so transitions appear
+    // instant even when `transitionDuration` is long.
+    content = IgnorePointer(
+      ignoring: enabled && effectiveConfig.ignorePointersWhenLoading,
+      child: content,
+    );
 
     if (config != null) {
       // Local config overrides are exposed to nested manual skeleton widgets

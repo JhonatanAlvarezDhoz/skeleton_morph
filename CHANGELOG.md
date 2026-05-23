@@ -1,3 +1,10 @@
+## 0.2.0
+
+- Added `SkeletonTransition` for animating between skeleton and real content.
+- Added `FadeSkeletonTransition`, `FadeThroughSkeletonTransition`, `ScaleFadeSkeletonTransition`, and `NoSkeletonTransition`.
+- Added `transition` and `transitionDuration` to `SkeletonConfig`.
+- Updated `SkeletonMorph` to apply configured transitions when `enabled` changes.
+
 ## 0.1.1
 
 - Added a centered image icon to `SkeletonImage` by default.
