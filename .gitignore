@@ -33,3 +33,9 @@ migrate_working_dir/
 /build/
 /coverage/
 docs/
+
+# Heavy documentation media
+assets/previews/*.gif
+assets/previews/*.mp4
+assets/previews/*.mov
+assets/previews/*.webm

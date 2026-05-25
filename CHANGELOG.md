@@ -1,10 +1,16 @@
+## 0.2.3
+
+- Restored external demo GIF references in the README.
+- Added a GitHub README fallback link for animated demos when Pub.dev does not render one or both previews.
+- Excluded heavy local GIF files from the published package to keep the package lightweight.
+
 ## 0.2.2
 
-- Fixed Pub.dev README preview by using local GIF assets for effect demos.
+...
 
 ## 0.2.1
 
-- Fixed README image URL for the shimmer effect demo on Pub.dev.
+...
 
 ## 0.2.0
 

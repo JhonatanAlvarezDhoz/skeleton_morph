@@ -10,12 +10,18 @@ Create automatic loading skeletons from your real Flutter UI, with optional hint
 
 | <div align="center">Pulse effect</div> | <div align="center">Shimmer effect</div> |
 | :---: | :---: |
-| <div align="center"><img src="assets/previews/pulseEffect.gif" alt="PulseEffect demo" width="320" /></div> | <div align="center"><img src="assets/previews/shimmerEffect.gif" alt="ShimmerEffect demo" width="320" /></div> |
+| <div align="center"><img src="https://raw.githubusercontent.com/JhonatanAlvarezDhoz/assets/main/preview/gif/pulseEffect.gif" alt="PulseEffect demo" width="320" /></div> | <div align="center"><img src="https://raw.githubusercontent.com/JhonatanAlvarezDhoz/assets/main/preview/gif/shimmerEffect.gif" alt="ShimmerEffect demo" width="320" /></div> |
 | Use `PulseEffect()` for a soft breathing placeholder animation. | Use `ShimmerEffect()` for a moving highlight placeholder animation. |
+
+> Demo preview fallback: if the animations are not rendered on Pub.dev, open the GitHub README to view the animated demos:
+>
+> [Open GitHub README demos](https://github.com/JhonatanAlvarezDhoz/skeleton_morph/blob/main/README.md#effects-demo)
 
 ## Version
 
-Current version: `0.2.0`
+ <a href="https://pub.dev/packages/skeleton_morph">
+    <img src="https://img.shields.io/pub/v/skeleton_morph.svg" alt="Pub Version" />
+  </a>◊
 ## Platform support
 
 `skeleton_morph` is a pure Flutter widget package and supports all Flutter platforms.
