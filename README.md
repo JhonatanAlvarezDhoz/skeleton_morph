@@ -21,7 +21,8 @@ Create automatic loading skeletons from your real Flutter UI, with optional hint
 
  <a href="https://pub.dev/packages/skeleton_morph">
     <img src="https://img.shields.io/pub/v/skeleton_morph.svg" alt="Pub Version" />
-  </a>◊
+  </a>
+
 ## Platform support
 
 `skeleton_morph` is a pure Flutter widget package and supports all Flutter platforms.
