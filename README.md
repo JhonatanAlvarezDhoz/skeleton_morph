@@ -10,7 +10,7 @@ Create automatic loading skeletons from your real Flutter UI, with optional hint
 
 | <div align="center">Pulse effect</div> | <div align="center">Shimmer effect</div> |
 | :---: | :---: |
-| <div align="center"><img src="https://raw.githubusercontent.com/JhonatanAlvarezDhoz/assets/main/preview/gif/pulseEffect.gif" alt="PulseEffect demo" width="320" /></div> | <div align="center"><img src="https://raw.githubusercontent.com/JhonatanAlvarezDhoz/assets/main/preview/gif/shimmerEffect.gif" alt="ShimmerEffect demo" width="320" /></div> |
+| <div align="center"><img src="https://raw.githubusercontent.com/JhonatanAlvarezDhoz/assets/main/preview/gif/pulseEffect.gif" alt="PulseEffect demo" width="320" /></div> | <div align="center"><img src="https://github.com/JhonatanAlvarezDhoz/assets/raw/main/preview/gif/shimmerEffect.gif" alt="ShimmerEffect demo" width="320" /></div> |
 | Use `PulseEffect()` for a soft breathing placeholder animation. | Use `ShimmerEffect()` for a moving highlight placeholder animation. |
 
 ## Version
