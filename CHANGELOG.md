@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Fixed Pub.dev README preview by using local GIF assets for effect demos.
+
 ## 0.2.1
 
 - Fixed README image URL for the shimmer effect demo on Pub.dev.
