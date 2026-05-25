@@ -1,6 +1,6 @@
 name: skeleton_morph
 description: Crea skeletons automáticos desde tu UI real, con hints opcionales para obtener resultados precisos en cards, imágenes, textos y listas.
-version: 0.2.0
+version: 0.2.1
 repository: https://github.com/JhonatanAlvarezDhoz/skeleton_morph
 issue_tracker: https://github.com/JhonatanAlvarezDhoz/skeleton_morph/issues
 

@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Fixed README image URL for the shimmer effect demo on Pub.dev.
+
 ## 0.2.0
 
 - Added `SkeletonTransition` for animating between skeleton and real content.
